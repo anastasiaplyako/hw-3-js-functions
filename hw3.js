@@ -2,7 +2,7 @@
 
 function splitAndMerge(str, sp) {
     var separator = sp + " " + sp;
-    var words = str.split(" ").join(" ").split("").join(sp).split(separator).join(" ");
+    var words = str.split("").join(sp).split(separator).join(" ");
     console.log(words);
     return words;
 }

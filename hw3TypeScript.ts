@@ -1,7 +1,7 @@
 
 function splitAndMerge(str: string, sp: string) {
     var separator: string = sp + " " + sp;
-    var words: string = str.split(" ").join(" ").split("").join(sp).split(separator).join(" ");
+    var words: string = str.split("").join(sp).split(separator).join(" ");
     console.log(words);
     return words;
 }
