@@ -1,8 +1,7 @@
 'use strict';
 
 function splitAndMerge(str, sp) {
-    var separator = sp + " " + sp;
-    var words = str.split("").join(sp).split(separator).join(" ");
+    var words = str.split("").join(sp).split(sp + " " + sp).join(" ");
     console.log(words);
     return words;
 }
@@ -22,12 +21,10 @@ function convertVersion2(hash) {
 }
 
 function toCamelCase(str) {
-    str = str.replace(/[-]+/g, '-');
-    str = str.replace(/[_]+/g, '-');
-    str = str.replace(/[-_](.)/g, function (char) {
-        return char[1].toUpperCase()
-    });
-    return str;
+    return str.replace(/[-_]+/g, '-').replace(/[-_](.)/g,
+        function (char) {
+            return char[1].toUpperCase()
+        })
 }
 
 function reverseEachWord(str) {

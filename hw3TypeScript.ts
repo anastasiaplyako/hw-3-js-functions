@@ -1,7 +1,5 @@
-
 function splitAndMerge(str: string, sp: string) {
-    var separator: string = sp + " " + sp;
-    var words: string = str.split("").join(sp).split(separator).join(" ");
+    var words: string = str.split("").join(sp).split(sp + " " + sp).join(" ");
     console.log(words);
     return words;
 }
@@ -25,12 +23,10 @@ function convertVersion2(hash: object) {
 console.log(convertVersion2({name: 'Jeremy', age: 24, role: 'Software Engineer'}))
 
 function toCamelCase(str: string) {
-    str = str.replace(/[-]+/g, '-');
-    str = str.replace(/[_]+/g, '-');
-    str = str.replace(/[-_](.)/g, function (char) {
+    return str.replace(/[-_]+/g, '-').replace(/[-_](.)/g,
+        function (char) {
         return char[1].toUpperCase()
-    });
-    return str;
+    })
 }
 
 console.log(toCamelCase("the-stealth-warrior"));
