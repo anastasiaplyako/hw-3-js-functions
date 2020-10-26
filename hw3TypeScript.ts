@@ -1,26 +1,18 @@
 function splitAndMerge(str: string, sp: string) {
-    var words: string = str.split("").join(sp).split(sp + " " + sp).join(" ");
-    console.log(words);
-    return words;
+    return str.split("").join(sp).split(sp + " " + sp).join(" ");
 }
 
-splitAndMerge("f wrfvh", ',')
+console.log(splitAndMerge("f wrfvh", ','))
 
 function convert(hash: object) {
-    return Object.entries(hash);
-}
-
-function convertVersion2(hash: object) {
-    var array: Array<any> = [];
-    var keys: string[] = Object.keys(hash);
-    var values: string[] = Object.values(hash);
-    for (var i = 0; i < keys.length; i++) {
-        array.push([keys[i], values[i]])
+    let res = [];
+    for (var index in hash) {
+        res.push([index, hash[index]]);
     }
-    return array;
+    return res;
 }
 
-console.log(convertVersion2({name: 'Jeremy', age: 24, role: 'Software Engineer'}))
+console.log(convert({name: 'Jeremy', age: 24, role: 'Software Engineer'}))
 
 function toCamelCase(str: string) {
     return str.replace(/[-_]+/g, '-').replace(/[-_](.)/g,
@@ -34,7 +26,7 @@ console.log(toCamelCase("the-stealth-warrior"));
 function reverseEachWord(str: string) {
     var words: string[] = str.split(" ");
     for (var i = 0; i < words.length; i++) {
-        words[i] = words[i].split("").reverse().join("")
+        words[i] = words[i].split("").reverse().join("");
     }
     return words.join(" ");
 }
@@ -42,21 +34,17 @@ function reverseEachWord(str: string) {
 console.log(reverseEachWord(" A fun little challenge! "))
 
 function stringExpansion(str) {
-    if (str.length === 0) return "";
-    var res: string = "";
-    for (var i = 0; i < str.length; i++) {
-        if (str[i].match(/^-{0,1}\d+$/)) {
-            for (var j = 1; j < str[i]; j++) {
-                if (!str[i + 1].match(/^-{0,1}\d+$/)) {
-                    res += str[i + 1];
+    if (!str.length) return "";
+    return str.replace(/(\d)+([A-Za-zА-Яа-я])/g, function (match, number, letter) {
+        return number.replace(/\d/g, function () {
+                var tmp = letter;
+                for (var i = 0; i < number - 1; i++) {
+                    letter += tmp;
                 }
+                return letter;
             }
-        } else {
-            res += str[i]
-        }
-    }
-    console.log(res)
-    return res;
+        );
+    })
 }
 
 console.log(stringExpansion('3D2a5d2f'))

@@ -1,24 +1,18 @@
 'use strict';
 
 function splitAndMerge(str, sp) {
-    var words = str.split("").join(sp).split(sp + " " + sp).join(" ");
-    console.log(words);
-    return words;
+    return str.split("").join(sp).split(sp + " " + sp).join(" ");
 }
 
 function convert(hash) {
-    return Object.entries(hash);
+    var res = [];
+    for (var index in hash) {
+        res.push([index, hash[index]]);
+    }
+    return res;
 }
 
-function convertVersion2(hash) {
-    var array = [];
-    var keys = Object.keys(hash);
-    var values = Object.values(hash);
-    for (var i = 0; i < keys.length; i++) {
-        array.push([keys[i], values[i]])
-    }
-    return array;
-}
+console.log(convert({name: 'Jeremy', age: 24, role: 'Software Engineer'}))
 
 function toCamelCase(str) {
     return str.replace(/[-_]+/g, '-').replace(/[-_](.)/g,
@@ -30,26 +24,23 @@ function toCamelCase(str) {
 function reverseEachWord(str) {
     var words = str.split(" ");
     for (var i = 0; i < words.length; i++) {
-        words[i] = words[i].split("").reverse().join("")
+        words[i] = words[i].split("").reverse().join("");
     }
     return words.join(" ");
 }
 
 function stringExpansion(str) {
-    if (str.length === 0) return "";
-    var res = "";
-    for (var i = 0; i < str.length; i++) {
-        if (str[i].match(/^-{0,1}\d+$/)) {
-            for (var j = 1; j < str[i]; j++) {
-                if (!str[i + 1].match(/^-{0,1}\d+$/)) {
-                    res += str[i + 1];
+    if (!str.length) return "";
+    return str.replace(/(\d)+([A-Za-zА-Яа-я])/g, function (match, number, letter) {
+        return number.replace(/\d/g, function () {
+                var tmp = letter;
+                for (var i = 0; i < number - 1; i++) {
+                    letter += tmp;
                 }
+                return letter;
             }
-        } else {
-            res += str[i]
-        }
-    }
-    return res;
+        );
+    })
 }
 
 function largest() {
@@ -115,7 +106,6 @@ module.exports = {
     stringExpansion: stringExpansion,
     reverseEachWord: reverseEachWord,
     toCamelCase: toCamelCase,
-    convertVersion2: convertVersion2,
     convert: convert,
     splitAndMerge: splitAndMerge,
     bind: Function.prototype.myBind
